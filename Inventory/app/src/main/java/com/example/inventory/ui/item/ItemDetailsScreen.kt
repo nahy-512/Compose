@@ -98,7 +98,7 @@ fun ItemDetailsScreen(
     ) { innerPadding ->
         ItemDetailsBody(
             itemDetailsUiState = uiState.value,
-            onSellItem = { },
+            onSellItem = { viewModel.reduceQuantityByOne() },
             onDelete = { },
             modifier = Modifier
                 .padding(innerPadding)
@@ -128,7 +128,7 @@ private fun ItemDetailsBody(
             onClick = onSellItem,
             modifier = Modifier.fillMaxWidth(),
             shape = MaterialTheme.shapes.small,
-            enabled = true
+            enabled = !itemDetailsUiState.outOfStock // 재고 수량이 0일 때 앱이 Sell 버튼을 사용 중지
         ) {
             Text(stringResource(R.string.sell))
         }
